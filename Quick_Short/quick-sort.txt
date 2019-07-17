@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main ()
+{
+    int i,arry[100],s;
+    scanf("%d",&s);
+     for(i=0;i<s;i++){
+        scanf("%d",&arry[i]);
+     }
+
+//    int size=9;
+//    int arry[]={15,2,7,6,11,8,4,16,5};
+    divide(arry,0,s-1);
+    for(i=0;i<s;i++){
+        printf("%d ",arry[i]);
+    }
+
+    return 0;
+}
+ int divide(int arry[],int start,int end)
+{
+    int pivot;
+    if(start>=end) return;
+    else
+    {
+
+        pivot= sort(arry,start,end);
+        divide(arry,start,pivot-1);
+        divide(arry,pivot+1,end);
+    }
+}
+int sort(int arry[],int start,int end)
+{
+    int i,j,pivot;
+    int moveptr_right=1;
+    pivot=arry[start];
+    i=start;
+    j=end;
+    while(i<j)
+    {
+        if(moveptr_right){
+            if(arry[j]<pivot){
+                arry[i]=arry[j];
+                i++;
+                moveptr_right=0;
+            }
+            else{
+                 j--;
+            }
+
+        }
+        else{
+            if(pivot<arry[i])  {
+                arry[j]=arry[i];
+                j--;
+                 moveptr_right=1;
+            }
+            else{
+                 i++;
+            }
+
+        }
+
+    }
+    arry[j]=pivot;
+    return j;
+}
+//Quick sort...
